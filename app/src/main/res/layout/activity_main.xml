@@ -42,12 +42,14 @@
                     android:text="LOGIN" />
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:padding="10dp">
 
                     <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/string_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="E-mail" />
@@ -55,15 +57,19 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="90dp"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    app:passwordToggleEnabled="true">
 
                     <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/string_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Password" />
+                        android:hint="Password"
+                        android:inputType="textPassword"/>
 
                 </android.support.design.widget.TextInputLayout>
             </android.support.v7.widget.CardView>

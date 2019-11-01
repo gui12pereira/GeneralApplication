@@ -1,21 +1,23 @@
 package br.com.senai.generalapplication;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
+    private Button button;
     private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
+    private TextInputLayout txtlEmail;
+    private TextInputLayout txtlSenha;
+    private EditText txtEmail;
+    private EditText txtSenha;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,38 +25,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.toolbar);
-        //Sobrepõe a toolbar criada pela padrão
         setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
+        button =  findViewById(R.id.button_login);
 
-        //Criando um menu alternado a partir da instância ActionBarDrawerToggle, que recebe 5 parâmetros:
-        ActionBarDrawerToggle toggle =
-                new ActionBarDrawerToggle(this,
-                        drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
+        txtlEmail = findViewById(R.id.text_input_email);
+        txtlSenha = findViewById(R.id.text_input_password);
+        txtEmail = findViewById(R.id.string_email);
+        txtSenha = findViewById(R.id.string_password);
 
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        navigationView = findViewById(R.id.nav_view);
-    }
+                String email = txtEmail.getText().toString().trim();
+                String senha = txtSenha.getText().toString().trim();
 
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+                if (email.isEmpty()) {
+                    txtlEmail.setError("E-mail é obrigatório!");
+                    txtlEmail.setErrorEnabled(true);
+                } else
+                    txtlEmail.setErrorEnabled(false);
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (senha.isEmpty()) {
+                    txtlSenha.setError("Senha é obrigatória!");
+                    txtlSenha.setErrorEnabled(true);
+                } else
+                    txtlSenha.setErrorEnabled(false);
 
-        if (item.getItemId() == R.id.menu_home){
-            Toast.makeText(this, "Entrada", Toast.LENGTH_SHORT ).show();
-        }
-        return false;
+                if (!email.isEmpty() && !senha.isEmpty()) {
+                    Intent categories = new Intent(MainActivity.this, CategoriesActivity.class);
+                    startActivity(categories);
+                }
+            }
+        });
     }
 }
 

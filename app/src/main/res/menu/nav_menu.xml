@@ -34,9 +34,7 @@
     <item android:title="User info"
         android:id="@+id/menu_more">
         <menu>
-            <item></item>
         </menu>
-
     </item>
 
 
